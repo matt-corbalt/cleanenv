@@ -337,12 +337,6 @@ func readStructMetadata(cfgRoot interface{}) ([]structMeta, error) {
 				if !fld.CanInterface() {
 					continue
 				}
-				// add structure to parsing stack
-				if _, found := validStructs[fld.Type()]; !found {
-					prefix, _ := fType.Tag.Lookup(TagEnvPrefix)
-					cfgStack = append(cfgStack, cfgNode{fld.Addr().Interface(), sPrefix + prefix})
-					continue
-				}
 
 				// process time.Time
 				if l, ok := fType.Tag.Lookup(TagEnvLayout); ok {
